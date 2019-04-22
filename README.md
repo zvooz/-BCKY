@@ -1,2 +1,2 @@
-# -BCKY
-^BCKY - the best performing index from r/WallStreetBets
+# ^BCKY
+## _the best performing index from r/WallStreetBets_
