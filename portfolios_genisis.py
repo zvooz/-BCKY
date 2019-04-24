@@ -7,7 +7,7 @@ why looking through git history if you can be lazy and just store a copy here
 
 import datetime
 
-class portfolios:
+class Portfolios:
 	epoch = datetime.date(2019, 3, 28)
 
 	# MC = "MC.PA"
