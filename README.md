@@ -24,7 +24,7 @@ ULTA|3
 
 ### ^BCKY.B
 
-^BCKY.B is a much longer, and possibly over-done extension to ^BCKY.A. It uses the comosition from [this post](https://www.reddit.com/r/wallstreetbets/comments/b6mudk/bcky_update_wsb_was_right_diversification_bad/). In addition to what is in ^BCKY.A, it has the following components:
+^BCKY.B is a much longer, and possibly over-done extension to ^BCKY.A. It uses the composition from [this post](https://www.reddit.com/r/wallstreetbets/comments/b6mudk/bcky_update_wsb_was_right_diversification_bad/). In addition to what is in ^BCKY.A, it has the following components:
 
 component|weight
 ---------|------
