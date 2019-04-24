@@ -75,3 +75,8 @@ class portfolios:
 		"TGT"	:	12,
 		"TIF"	:	10
 	}
+	
+	# $SPY
+	SPY = {
+		"SPY"	:	1
+	}
