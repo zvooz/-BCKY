@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+
+##
+# binary locations
+bin64/
+bin32/
