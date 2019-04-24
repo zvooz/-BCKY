@@ -109,3 +109,9 @@ venv.bak/
 # binary locations
 bin64/
 bin32/
+
+
+##
+# secret stuff
+credentials
+
