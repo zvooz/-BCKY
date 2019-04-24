@@ -6,9 +6,10 @@ from dateutil import rrule, parser
 from ftplib import FTP
 from directoryelements import DirectoryElements
 import json
+import multiprocessing.dummy as mpd
 import os
 import pandas
-from portfolios import portfolios
+from portfolios import Portfolios
 import requests
 import sys
 import time
@@ -36,7 +37,7 @@ columns_to_remove = [
 
 SPY = "SPY"
 
-portfolios = portfolios()
+portfolios = Portfolios()
 directory_elements = DirectoryElements()
 
 
@@ -114,9 +115,9 @@ def pd_to_csv(file_path, pd):
 
 query_parameters["token"] = get_credentials()
 
-BCKY_A_symbols = portfolios.BCKY_A.keys()
-BCKY_B_symbols = portfolios.BCKY_B.keys()
-BCKY_V_symbols = portfolios.BCKY_V.keys()
+BCKY_A_symbols = set(portfolios.BCKY_A.keys())
+BCKY_B_symbols = set(portfolios.BCKY_B.keys())
+BCKY_V_symbols = set(portfolios.BCKY_V.keys())
 symbols = list(BCKY_A_symbols | BCKY_B_symbols | BCKY_V_symbols)
 
 trading_day = get_previous_trading_day()
