@@ -8,7 +8,6 @@ from directoryelements import DirectoryElements
 import json
 import os
 import pandas
-import platform
 from portfolios import portfolios
 import requests
 import sys
@@ -43,9 +42,6 @@ directory_elements = DirectoryElements()
 
 
 def get_trading_days():
-	global trading_days_unprocessed
-	global trading_days_all
-
 	trading_days_processed = set([datetime.datetime.strptime(EOD, "%Y-%m-%d").date() for EOD in os.walk(directory_elements.EODs_dir).next()[-1]])
 
 	trading_days_unprocessed = set([
@@ -66,8 +62,7 @@ def get_trading_days():
 	trading_days_unprocessed = list(trading_days_unprocessed.intersection(trading_days_all) - trading_days_processed)
 	trading_days_unprocessed.sort()
 
-	trading_days_all = list(trading_days_all)
-	trading_days_all.sort()
+	return trading_days_unprocessed
 
 
 
@@ -130,8 +125,6 @@ def pd_to_csv(file_path, pd):
 		pd.to_csv(file_path, index = False)
 
 
-get_trading_days()
-
 query_parameters["token"] = get_credentials()
 
 BCKY_A_symbols = portfolios.BCKY_A.keys()
@@ -139,7 +132,8 @@ BCKY_B_symbols = portfolios.BCKY_B.keys()
 BCKY_V_symbols = portfolios.BCKY_V.keys()
 symbols = list(BCKY_A_symbols | BCKY_B_symbols | BCKY_V_symbols)
 
-for trading_day in trading_days_unprocessed:
+trading_days = get_trading_days()
+for trading_day in trading_days:
 	EOD_ohlcv = []
 	BCKY_A_ohlcv = []
 	BCKY_B_ohlcv = []
