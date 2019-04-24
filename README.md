@@ -89,7 +89,7 @@ TIF|10
 
 ### caveats
 
-My code stinks. Think quadruple times before you bet your on ^BCKY. 
+My code stinks. Think quadruple times before you bet all your money on ^BCKY. 
 
 I haven't figured out how to take market holidays off the x-axis. Please help me if you know how. 
 
