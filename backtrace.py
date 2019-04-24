@@ -190,4 +190,4 @@ for trading_day in trading_days:
 	SPY_df = pandas.DataFrame(SPY_ohlcv)
 	pd_to_csv(os.path.join(directory_elements.portfolios_dir, SPY), SPY_df)
 	
-	time.sleep(1)
+	time.sleep(0.1)
