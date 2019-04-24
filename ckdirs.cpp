@@ -37,7 +37,7 @@ void dir_check(string &);
  */
 int main(int argc, char **argv) {
 	long opt;
-	while((opt = getopt(argc, argv, "Ho:h:l:c:v:x:p:m:s:")) != -1) {
+	while((opt = getopt(argc, argv, "he:A:B:V:p:")) != -1) {
 		switch(opt) {
 			case 'h': help(argv[0]); break;
 			case 'e': e_dir = optarg; break;
@@ -56,7 +56,7 @@ int main(int argc, char **argv) {
 	dir_check(V_dir);
 	dir_check(p_dir);
 	
-	cout << "environment fully tested and initialised\n";
+	cout << "directory check passed\n";
 }
 
 /*
