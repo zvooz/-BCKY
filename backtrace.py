@@ -4,13 +4,13 @@ import copy
 import datetime
 from dateutil import rrule, parser
 from ftplib import FTP
+from directoryelements import DirectoryElements
 import json
 import os
 import pandas
 import platform
 from portfolios import portfolios
 import requests
-import shlex
 import sys
 import time
 
@@ -18,16 +18,6 @@ import time
 
 testing = True	# True for development and testing, False for production
 poolsize = 8	# make my cpu cry!
-
-ckdirs = "bin64/ckdirs" if platform.architecture()[0] == "64bit" else "bin32/ckdirs"
-
-plots_subdir = "plots"
-portfolios_subdir = "portfolios"
-EODs_subdir = "aggregated EODs"
-BCKY_A_subdir = "^BCKY.A"
-BCKY_B_subdir = "^BCKY.B"
-BCKY_V_subdir = "^BCKY.V"
-
 
 NASDAQ_ftp = "ftp.nasdaqtrader.com"
 NASDAQ_crosses_dir = "files/crosses"
@@ -46,6 +36,7 @@ columns_to_remove = [
 ]
 
 portfolios = portfolios()
+directory_elements = DirectoryElements()
 
 
 
@@ -53,7 +44,7 @@ def get_trading_days():
 	global trading_days_unprocessed
 	global trading_days_all
 
-	trading_days_processed = set([datetime.datetime.strptime(EOD, "%Y-%m-%d").date() for EOD in os.walk(EODs_dir).next()[-1]])
+	trading_days_processed = set([datetime.datetime.strptime(EOD, "%Y-%m-%d").date() for EOD in os.walk(directory_elements.EODs_dir).next()[-1]])
 
 	trading_days_unprocessed = set([
 		datetime_object.date() for datetime_object in list(
@@ -136,25 +127,6 @@ def pd_to_csv(file_path, df):
 
 
 
-cur_dir = os.getcwd()
-plots_dir = os.path.join(cur_dir, plots_subdir)
-portfolios_dir = os.path.join(cur_dir, portfolios_subdir)
-EODs_dir = os.path.join(portfolios_dir, EODs_subdir)
-BCKY_A_dir = os.path.join(portfolios_dir, BCKY_A_subdir)
-BCKY_B_dir = os.path.join(portfolios_dir, BCKY_B_subdir)
-BCKY_V_dir = os.path.join(portfolios_dir, BCKY_V_subdir)
-
-
-ckdirs_args = shlex.split("\"" + os.path.join(cur_dir, ckdirs)
-	+ "\" -e \"" + EODs_dir
-	+ "\" -A \"" + BCKY_A_dir
-	+ "\" -B \"" + BCKY_B_dir
-	+ "\" -V \"" + BCKY_V_dir
-	+ "\" -p \"" + plots_dir
-	+ "\"")
-ckdirs_exec = subprocess.Popen(ckdirs_args)
-ckdirs_exec.communicate()
-
 get_trading_days()
 
 query_parameters["token"] = get_credentials()
@@ -182,9 +154,9 @@ for trading_day in trading_days_unprocessed:
 	BCKY_A_df = dict_to_DataFrame(BCKY_A_ohlcv)
 	BCKY_B_df = dict_to_DataFrame(BCKY_B_ohlcv)
 	BCKY_V_df = dict_to_DataFrame(BCKY_V_ohlcv)
-	pd_to_csv(os.path.join(EODs_dir, trading_day.isoformat()), EOD_df)
-	pd_to_csv(os.path.join(BCKY_A_dir, trading_day.isoformat()), BCKY_A_df)
-	pd_to_csv(os.path.join(BCKY_B_dir, trading_day.isoformat()), BCKY_B_df)
-	pd_to_csv(os.path.join(BCKY_V_dir, trading_day.isoformat()), BCKY_V_df)
+	pd_to_csv(os.path.join(directory_elements.EODs_dir, trading_day.isoformat()), EOD_df)
+	pd_to_csv(os.path.join(directory_elements.BCKY_A_dir, trading_day.isoformat()), BCKY_A_df)
+	pd_to_csv(os.path.join(directory_elements.BCKY_B_dir, trading_day.isoformat()), BCKY_B_df)
+	pd_to_csv(os.path.join(directory_elements.BCKY_V_dir, trading_day.isoformat()), BCKY_V_df)
 	
 	time.sleep(1)
