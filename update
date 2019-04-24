@@ -1,3 +1,4 @@
+make
 rm -rf plots/
 python backtrace.py
 python chartmedaddy.py
