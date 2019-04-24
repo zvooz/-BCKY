@@ -95,6 +95,8 @@ I haven't figured out how to take market holidays off the x-axis. Please help me
 
 The stocks for MC and OR I use in the portfolios are $LVMHF and $LRLCF instead of $MC.PA and $OR.PA because I'm too lazy to do currency conversions, although it is quite simple to get the exchange reate from IEX. 
 
+This thing doesn't handle stock splits and portfolio rebalances, yet. I kinda have an idea of how it might be done, but I'm too lazy to do it for now. Luckily none of the companies in the portfolios have splits anytime soon as far as I know.
+
 There are more caveats, but I can't remember right now. I'm too tired.
 
 ### weighting
