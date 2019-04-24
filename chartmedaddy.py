@@ -93,6 +93,9 @@ def plot_mountains(indices, names):
 	ax.xaxis.grid(True, "major")
 	ax.grid(True)
 
+	y_axis_vals = ax.get_yticks()
+	ax.set_yticklabels(['{:,.2%}'.format(x) for x in y_axis_vals])
+
 	fig.set_dpi(300)
 	fig.set_figheight(3.375)
 	fig.set_figwidth(6)
@@ -102,7 +105,7 @@ def plot_mountains(indices, names):
 	plt.legend(names)
 	plt.xlabel("Date", fontsize=6)
 	plt.ylabel("Percent Change", fontsize=6)
-	plt.savefig(os.path.join(directory_elements.plots_dir, "$SPY lol..."),
+	plt.savefig(os.path.join(directory_elements.plots_dir, "$SPY-lol..."),
 		edgecolor	= "#FFFFFF00",
 		orientation	= "landscape",
 		format		= "png",
@@ -143,7 +146,7 @@ def plot_mountain(BCKY_close, BCKY_name):
 
 	plt.xlabel("Date", fontsize=6)
 	plt.ylabel("End-of-Day Quote", fontsize=6)
-	plt.savefig(os.path.join(directory_elements.plots_dir, "{} Mountain".format(BCKY_name)),
+	plt.savefig(os.path.join(directory_elements.plots_dir, "{}-Mountain".format(BCKY_name)),
 		edgecolor	= "#FFFFFF00",
 		orientation	= "landscape",
 		format		= "png",
@@ -174,9 +177,6 @@ def plot_OHLC(BCKY_OHLC, BCKY_name):
 	ax.xaxis.grid(True, "major")
 	ax.grid(True)
 
-	y_axis_vals = ax.get_yticks()
-	ax.set_yticklabels(['{:,.2%}'.format(x) for x in y_axis_vals])
-
 	fig.set_dpi(300)
 	fig.set_figheight(3.375)
 	fig.set_figwidth(6)
@@ -185,7 +185,7 @@ def plot_OHLC(BCKY_OHLC, BCKY_name):
 
 	plt.xlabel("Date", fontsize=6)
 	plt.ylabel("End-of-Day Quote", fontsize=6)
-	plt.savefig(os.path.join(directory_elements.plots_dir, "{} OHLC".format(BCKY_name)),
+	plt.savefig(os.path.join(directory_elements.plots_dir, "{}-OHLC".format(BCKY_name)),
 		edgecolor	= "#FFFFFF00",
 		orientation	= "landscape",
 		format		= "png",
