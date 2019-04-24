@@ -16,7 +16,7 @@ import time
 
 
 
-testing = True	# True for development and testing, False for production
+testing = False	# True for development and testing, False for production
 poolsize = 8	# make my cpu cry!
 
 NASDAQ_ftp = "ftp.nasdaqtrader.com"
