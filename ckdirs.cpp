@@ -22,6 +22,7 @@ string e_dir;
 string A_dir;
 string B_dir;
 string V_dir;
+string p_dir;
 
 /*
  *	forward declarations
@@ -43,6 +44,7 @@ int main(int argc, char **argv) {
 			case 'A': A_dir = optarg; break;
 			case 'B': B_dir = optarg; break;
 			case 'V': V_dir = optarg; break;
+			case 'p': p_dir = optarg; break;
 			default: cerr << "Warning: ignore undefined argument: " << (char)opt << " " << optarg << endl; cout << "check -h for help\n"; break;
 		}
 	}
@@ -52,6 +54,7 @@ int main(int argc, char **argv) {
 	dir_check(A_dir);
 	dir_check(B_dir);
 	dir_check(V_dir);
+	dir_check(p_dir);
 	
 	cout << "environment fully tested and initialised\n";
 }
@@ -68,6 +71,7 @@ void help(char * progname) {
 	printf("\t-A <^BCKY.A EOD OHLCV data>\n\t\t\tThis is where you tell the program where you want to save ^BCKY.A's EOD OHLCV data, MANDATORY.\n");
 	printf("\t-B <^BCKY.B EOD OHLCV data>\n\t\t\tThis is where you tell the program where you want to save ^BCKY.B's EOD OHLCV data, MANDATORY.\n");
 	printf("\t-V <^BCKY.V EOD OHLCV data>\n\t\t\tThis is where you tell the program where you want to save ^BCKY.V's EOD OHLCV data, MANDATORY.\n");
+	printf("\t-p <plots and charts>\n\t\t\tThis is where you tell the program where you want to save the plots and charts generated from all the data, MANDATORY.\n");
 	exit(0);
 }
 
@@ -97,6 +101,10 @@ void arg_check() {
 		cerr << "lows directory is not set: set -h (help) for instructions\n";
 	}
 	if (V_dir.empty()) {
+		bad = true;
+		cerr << "closes directory is not set: set -h (help) for instructions\n";
+	}
+	if (p_dir.empty()) {
 		bad = true;
 		cerr << "closes directory is not set: set -h (help) for instructions\n";
 	}
