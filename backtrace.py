@@ -35,6 +35,8 @@ columns_to_remove = [
 	u"date"
 ]
 
+SPY = "SPY"
+
 portfolios = portfolios()
 directory_elements = DirectoryElements()
 
@@ -121,10 +123,11 @@ def dict_to_DataFrame(BCKY_dict):
 
 
 
-def pd_to_csv(file_path, df):
-	if not os.path.isfile(file_path):
-		df.to_csv(file_path, index = False)
-
+def pd_to_csv(file_path, pd):
+	if os.path.isfile(file_path):
+		pd.to_csv(file_path, mode = 'a', header = False, index = False)
+	else:
+		pd.to_csv(file_path, index = False)
 
 
 get_trading_days()
@@ -158,5 +161,9 @@ for trading_day in trading_days_unprocessed:
 	pd_to_csv(os.path.join(directory_elements.BCKY_A_dir, trading_day.isoformat()), BCKY_A_df)
 	pd_to_csv(os.path.join(directory_elements.BCKY_B_dir, trading_day.isoformat()), BCKY_B_df)
 	pd_to_csv(os.path.join(directory_elements.BCKY_V_dir, trading_day.isoformat()), BCKY_V_df)
+
+	SPY_ohlcv = json.loads(requests.get((IEX_baseurl if not testing else IEX_testurl) + get_stock + SPY + get_date_query, params = query_parameters).text)[0]
+	SPY_df = DataFrame(SPY)
+	pd_to_csv(os.path.join(directory_elements.portfolios_dir, SPY), SPY_df)
 	
 	time.sleep(1)
