@@ -148,6 +148,19 @@ for trading_day in trading_days:
 	# 		trading_days_pool.map(query_thread, symbols)
 	# 	trading_days_pool.join()
 
+	try:
+		SPY_ohlcv = json.loads(requests.get((IEX_baseurl if not testing else IEX_testurl) + get_stock + SPY + get_date_query, params = query_parameters).text)
+	except Exception:
+		print "WARNING: No $SPY data on {}. Is it not a trading day?\n".format(trading_day.isoformat())
+		continue
+
+	if SPY_ohlcv:
+		SPY_df = pandas.DataFrame(SPY_ohlcv)
+		pd_to_csv(os.path.join(directory_elements.portfolios_dir, SPY), SPY_df)
+	else:
+		print "WARNING: No $SPY data on {}.\n\tIs it a not trading day?\n\tOr, maybe IEX just haven't updated the data yet?\n".format(trading_day.isoformat())
+		continue
+
 	for symbol in symbols:
 		try:
 			symbol_ohlcv = json.loads(requests.get((IEX_baseurl if not testing else IEX_testurl) + get_stock + symbol + get_date_query, params = query_parameters).text)[0]
@@ -181,13 +194,4 @@ for trading_day in trading_days:
 		BCKY_V_df = dict_to_DataFrame(BCKY_V_ohlcv)
 		pd_to_csv(os.path.join(directory_elements.BCKY_V_dir, trading_day.isoformat()), BCKY_V_df)
 
-	try:
-		SPY_ohlcv = json.loads(requests.get((IEX_baseurl if not testing else IEX_testurl) + get_stock + SPY + get_date_query, params = query_parameters).text)
-	except Exception:
-		print "WARNING: No $SPY data on {}. Is it a trading day?".format(trading_day.isoformat())
-		continue
-
-	SPY_df = pandas.DataFrame(SPY_ohlcv)
-	pd_to_csv(os.path.join(directory_elements.portfolios_dir, SPY), SPY_df)
-	
 	time.sleep(0.1)
