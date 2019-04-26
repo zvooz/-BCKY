@@ -97,6 +97,8 @@ The stocks for MC and OR I use in the portfolios are $LVMHF and $LRLCF instead o
 
 This thing doesn't handle stock splits and portfolio rebalances, yet. I kinda have an idea of how it might be done, but I'm too lazy to do it for now. Luckily none of the companies in the portfolios have splits anytime soon as far as I know.
 
+For all the candlestick charts, the open and close quotes are accurates, but the highs and lows are absolutely not. The highs and lows reflect the highest possible highs and lowest possible lows. To get accurate highs and lows, I would need tick data, but that would exhaust my free IEX accoun's message quota quite quickly. I don't even know if I have enough quota for one day's tick data.
+
 There are more caveats, but I can't remember right now. I'm too tired.
 
 ### weighting
