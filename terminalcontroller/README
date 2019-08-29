@@ -1,0 +1,14 @@
+
+Introduction
+============
+
+This small script provides convenience functions for formatting text written to 
+bash and tcsh terminals.  It was modified from code found at:
+
+  http://code.activestate.com/recipes/475116/
+
+The only significant additions are convenience functions for colorizing output,
+printing different levels of info (announce, info, warn, and error), and properly
+handling text wrapping when color-coding characters are printed in user input
+prompts.  Useful for, e.g. printing out info/status to the terminal screen during
+interactive scripts.
