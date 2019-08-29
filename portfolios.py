@@ -2,20 +2,24 @@
 
 import datetime
 
-class Portfolios:
-	epoch = datetime.date(2019, 3, 28)
 
+class Portfolios:
+	def __init__(self):
+		pass
+	
+	epoch = datetime.date(2019, 3, 28)
+	
 	# MC = u"MC.PA"
 	MC = u"LVMHF"
 	# OR = u"OR.PA"
 	OR = u"LRLCF"
-
+	
 	# ^BCKY.A or ^BCKYA, the primary ^BCKY portfolio
 	BCKY_A = {
-		u"AAPL"	:	5,
-		u"ETSY"	:	15,
-		u"LULU"	:	6,
-		MC		:	3,
+		u"AAPL": 5,
+		u"ETSY": 15,
+		u"LULU": 6,
+		MC	:	3,
 		OR		:	4,
 		u"PLNT"	:	15,
 		u"SBUX"	:	14,
@@ -69,4 +73,8 @@ class Portfolios:
 		u"SNAP"	:	93,
 		u"TGT"	:	12,
 		u"TIF"	:	10
+	}
+	
+	RTRD = {
+		u"BYND" :   22
 	}
