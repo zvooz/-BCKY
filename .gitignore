@@ -193,6 +193,7 @@ fabric.properties
 ##
 # other Python stuff
 *.pyc
+test.py
 
 
 ## Mac stuff
