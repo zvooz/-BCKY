@@ -131,8 +131,7 @@ class ProgressBar:
             self.progress_record.append(None)
 
         current_time = datetime.datetime.now()
-        secs_in_time = ((current_time - start_time) * (total - iteration) // (
-            iteration if iteration != 0 else 1)).total_seconds()
+        secs_in_time = ((current_time - start_time) * (total - iteration) // (iteration if iteration != 0 else 1)).total_seconds()
         minutes_left = secs_in_time / 60
         seconds_left = secs_in_time % 60
 
@@ -148,8 +147,7 @@ class ProgressBar:
 
         bar = fills[-1] * big_length + fills[smo_length] + "-" * (length - big_length - (1 if smo_length > 0 else 0))
 
-        progress = "\r%-30s |%s| %6s%% %s (%4d/%-4d)\ttime remaining: %3d:%02d\r" % (
-        prefix, green(bar), percent, suffix, iteration, total, minutes_left, seconds_left)
+        progress = "\r%-30s |%s| %6s%% %s (%4d/%-4d)\ttime remaining: %3d:%02d\r" % (prefix, green(bar), percent, suffix, iteration, total, minutes_left, seconds_left)
         self.progress_record[position] = progress
         self.mv2line(self.current_err_height + position)
         sys.stdout.write(str(progress))
