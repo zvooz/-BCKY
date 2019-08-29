@@ -51,7 +51,7 @@ class ProgressBar:
         i = 0
         for progress in self.progress_record:
             self.mv2line(self.current_err_height + i)
-            sys.stdout.write(progress)
+            sys.stdout.write(str(progress))
             sys.stdout.flush()
             i += 1
 
@@ -152,7 +152,7 @@ class ProgressBar:
         prefix, green(bar), percent, suffix, iteration, total, minutes_left, seconds_left)
         self.progress_record[position] = progress
         self.mv2line(self.current_err_height + position)
-        sys.stdout.write(progress)
+        sys.stdout.write(str(progress))
         sys.stdout.flush()
         self.mv2line(self.current_err_height + self.progress_report_count)
 

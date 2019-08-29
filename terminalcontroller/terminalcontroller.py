@@ -157,90 +157,90 @@ class TerminalController:
             return s
         else:
             rendered = getattr(self, s[2:-1])
-            if self.escape :
+            if self.escape:
                 rendered = '\001'+rendered+'\002'
             return rendered
 
 
 # convenience methods
-def colorize(str,codes='normal') :
+def colorize(str,codes='normal'):
     term = TerminalController(escape=TERM_ESCAPE)
     outstr = ''.join(['${%s}'%l.upper() for l in codes.split(' ')])
     return term.render(outstr+str+'${NORMAL}')
-def normal(st) :
+def normal(st):
     return colorize(st)
 
 # fg colors
-def black(st) :
-    return colorize(st,'black')
-def blue(st) :
-    return colorize(st,'blue')
-def green(st) :
-    return colorize(st,'green')
-def cyan(st) :
-    return colorize(st,'cyan')
-def red(st) :
-    return colorize(st,'red')
-def magenta(st) :
-    return colorize(st,'magenta')
-def yellow(st) :
-    return colorize(st,'yellow')
-def white(st) :
-    return colorize(st,'white')
+def black(st):
+    return colorize(st, 'black')
+def blue(st):
+    return colorize(st, 'blue')
+def green(st):
+    return colorize(st, 'green')
+def cyan(st):
+    return colorize(st, 'cyan')
+def red(st):
+    return colorize(st, 'red')
+def magenta(st):
+    return colorize(st, 'magenta')
+def yellow(st):
+    return colorize(st, 'yellow')
+def white(st):
+    return colorize(st, 'white')
 
 # bg colors
-def bg_black(st) :
-    return colorize(st,'bg_black')
-def bg_blue(st) :
-    return colorize(st,'bg_blue')
-def bg_green(st) :
-    return colorize(st,'bg_green')
-def bg_cyan(st) :
-    return colorize(st,'bg_cyan')
-def bg_red(st) :
-    return colorize(st,'bg_red')
-def bg_magenta(st) :
-    return colorize(st,'bg_magenta')
-def bg_yellow(st) :
-    return colorize(st,'bg_yellow')
-def bg_white(st) :
-    return colorize(st,'bg_white')
+def bg_black(st):
+    return colorize(st, 'bg_black')
+def bg_blue(st):
+    return colorize(st, 'bg_blue')
+def bg_green(st):
+    return colorize(st, 'bg_green')
+def bg_cyan(st):
+    return colorize(st, 'bg_cyan')
+def bg_red(st):
+    return colorize(st, 'bg_red')
+def bg_magenta(st):
+    return colorize(st, 'bg_magenta')
+def bg_yellow(st):
+    return colorize(st, 'bg_yellow')
+def bg_white(st):
+    return colorize(st, 'bg_white')
 
 # styles
-def bold(st) :
-    return colorize(st,'bold')
-def blink(st) :
-    return colorize(st,'blink')
-def reverse(st) :
-    return colorize(st,'reverse')
+def bold(st):
+    return colorize(st, 'bold')
+def blink(st):
+    return colorize(st, 'blink')
+def reverse(st):
+    return colorize(st, 'reverse')
 
 # convenience logging functions
-def info(st,fd=sys.stderr) :
-    out_st = 'INFO: %s\n'%st
-    if fd :
+def info(st, fd=sys.stderr):
+    out_st = 'INFO: %s'%st + TerminalController.CLEAR_EOL + '\n'
+    if fd:
         fd.flush()
-        fd.write(colorize(out_st,'bold white'))
+        fd.write(colorize(out_st, 'bold white'))
     return out_st
-def warn(st,fd=sys.stderr) :
-    out_st = 'WARN: %s\n'%st
-    if fd :
+def warn(st, fd=sys.stderr):
+    out_st = 'WARN: %s'%st + TerminalController.CLEAR_EOL + '\n'
+    if fd:
         fd.flush()
-        fd.write(colorize('WARN: ','bold magenta')+colorize(st+'\n','bold yellow'))
+        fd.write(colorize('WARN: ', 'bold magenta') + colorize(st + TerminalController.CLEAR_EOL + '\n', 'bold yellow'))
     return out_st
-def error(st,fd=sys.stderr) :
-    out_st = 'ERROR: %s\n'%st
-    if fd :
+def error(st, fd=sys.stderr):
+    out_st = 'ERROR: %s'%st + TerminalController.CLEAR_EOL + '\n'
+    if fd:
         fd.flush()
-        fd.write(colorize('ERROR: ','bold red')+colorize(st+'\n','bold red'))
+        fd.write(colorize('ERROR: ', 'bold red') + colorize(st + TerminalController.CLEAR_EOL + '\n', 'bold red'))
     return out_st
-def announce(st,fd=sys.stderr) :
-    out_st = '\n'+(' '+st+' ').center(max(80,80-len(st)),'=')+'\n'
-    if fd :
+def announce(st, fd=sys.stderr):
+    out_st = '\n' + (' ' + st + ' ').center(max(80, 80 - len(st)), '=') + TerminalController.CLEAR_EOL + '\n'
+    if fd:
         fd.flush()
-        fd.write(colorize(out_st,'bold yellow'))
+        fd.write(colorize(out_st, 'bold yellow'))
     return out_st
 
-def test() :
+def test():
     sys.stdout.write(normal('Normal colors:\n'))
     sys.stdout.write('This is %s text.\n'%bg_white(black('black')))
     sys.stdout.write('This is %s text.\n'%blue('blue'))
