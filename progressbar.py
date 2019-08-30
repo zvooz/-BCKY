@@ -148,7 +148,7 @@ class ProgressBar:
 
         bar = fills[-1] * big_length + fills[smo_length] + u'-' * (length - big_length - (1 if smo_length > 0 else 0))
 
-        progress = u"\r%-30s |%s| %6s%% %s (%4d/%-4d)\ttime remaining: %3d:%02d\r" % (prefix, green(bar), percent, suffix, iteration, total, minutes_left, seconds_left)
+        progress = u"\r%-16s |%s| %6s%% %s (%4d/%-4d)\ttime remaining: %3d:%02d\r" % (prefix, green(bar), percent, suffix, iteration, total, minutes_left, seconds_left)
         self.progress_record[position] = progress
         self.mv2line(self.current_err_height + position)
         sys.stdout.write(progress)
