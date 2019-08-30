@@ -16,14 +16,14 @@ class Portfolios:
 	
 	# ^BCKY.A or ^BCKYA, the primary ^BCKY portfolio
 	BCKY_A = {
-		u"AAPL": 5,
-		u"ETSY": 15,
-		u"LULU": 6,
-		MC	:	3,
+		u"AAPL" : 5,
+		u"ETSY" : 15,
+		u"LULU" : 6,
+		MC	    :	3,
 		OR		:	4,
-		u"PLNT"	:	15,
-		u"SBUX"	:	14,
-		u"ULTA"	:	3
+		u"PLNT" :	15,
+		u"SBUX" :	14,
+		u"ULTA" :	3
 	}
 
 	# ^BCKY.B or ^BCKYB, the secondary ^BCKY portfolio, a superset of ^BCKY.A or ^BCKYA
