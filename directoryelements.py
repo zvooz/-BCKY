@@ -15,8 +15,6 @@ class DirectoryElements:
 	
 	ckdirs = u"ckdirs"
 	
-	ckdirs = u"bin64/ckdirs" if platform.architecture()[0] == u"64bit" else u"bin32/ckdirs"
-
 	plots_subdir = u"plots"
 	portfolios_subdir = u"portfolios"
 	EODs_subdir = u"aggregated EODs"
@@ -26,13 +24,18 @@ class DirectoryElements:
 	plots_dir = os.path.join(cur_dir, plots_subdir)
 	portfolios_dir = os.path.join(cur_dir, portfolios_subdir)
 	EODs_dir = os.path.join(portfolios_dir, EODs_subdir)
-	indices_dirs = [os.path.join(portfolios_dir, index_subdir) for index_subdir in indices_subdirs]
+	indices_dirs = {}
+	for index_subdir in indices_subdirs:
+		indices_dirs[index_subdir] = os.path.join(portfolios_dir, index_subdir)
+	# indices_dirs = {index_subdir: os.path.join(portfolios_dir, index_subdir) for index_subdir in indices_subdirs}
 
 	ckdirs_args = shlex.split(
 		u"\""
 		+ os.path.join(cur_dir, u"bin64" if platform.architecture()[0] == u"64bit" else u"bin32", ckdirs)
-		+ "\""
-		+ u' '.join([u"\"" + index_dir + u"\"" for index_dir in indices_subdirs])
+		+ u"\" \"" + EODs_dir
+		+ u"\" \"" + plots_dir
+		+ u"\" "
+		+ u' '.join([u"\"" + index_dir + u"\"" for index_dir in indices_dirs.values()])
 	)
 	
 	ckdirs_exec = subprocess.Popen(ckdirs_args)

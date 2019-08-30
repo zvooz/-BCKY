@@ -25,7 +25,7 @@ using namespace std;
  */
 void help(char*);
 void error(const char *, const char *);
-void dir_check(string &);
+void dir_check(string);
 
 /*
  *	main() - parse command line
@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
 	}
 	
 	for (int i = optind; i < argc; i++) {
-		dir_check(argv[i])
+		dir_check(argv[i]);
 	}
 }
 
@@ -66,13 +66,13 @@ void error(const char * errmsg1, const char * errmsg2) {
 /*
  *	dir_check() - check if a directory exists, and create it if not
  */
-void dir_check(string & dirpath) {
+void dir_check(string dirpath) {
 	struct stat stat_dirpath;
 	if (stat(dirpath.c_str(), &stat_dirpath) != 0 || !(stat_dirpath.st_mode & S_IFDIR)) {
 		cout << "creating directory " << dirpath << endl;
-		if ((system(("mkdir -p \"" + dirpath + "\"").c_str()) != 0)) {
+		if ((system(("mkdir -p \'" + dirpath + "\'").c_str()) != 0)) {
 			error(("directory \"" + dirpath + "\" does not exist; unable to create the the directory: ").c_str(), strerror(errno));
 		}
 	}
-	system(("sudo chmod 775 \"" + dirpath + "\" && sudo chown -R " + getlogin() + " \"" + dirpath + "\"").c_str());
+	system(("chmod 755 \"" + dirpath + "\" && chown -R " + getlogin() + " \"" + dirpath + "\"").c_str());
 }
