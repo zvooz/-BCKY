@@ -75,6 +75,19 @@ class Portfolios:
 		u"TIF"	:	10
 	}
 	
+	# ^RTRD, the r/WallStreetBets Retard Portfolio
 	RTRD = {
 		u"BYND" :   22
+	}
+	
+	SPY = {
+		u"SPY" : 1
+	}
+	
+	portfolios = {
+		u"^BCKY.A": BCKY_A,
+		u"^BCKY.B": BCKY_B,
+		u"^BCKY.V": BCKY_V,
+		u"^RTRD": RTRD,
+		u"$SPY": SPY
 	}
