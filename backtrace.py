@@ -171,6 +171,7 @@ for trading_day in trading_days:
 			requests.get((IEX_baseurl if not testing else IEX_testurl) + get_stock + SPY + get_date_query, params=query_parameters).text)
 	except Exception:
 		progress_bar.wrn_report(u"No $SPY data on {}. Is it not a trading day?\n".format(trading_day.isoformat()))
+		days_iter += 1
 		continue
 
 	if SPY_ohlcv:
@@ -178,6 +179,7 @@ for trading_day in trading_days:
 		pd_to_csv(os.path.join(directory_elements.portfolios_dir, SPY), SPY_df)
 	else:
 		progress_bar.wrn_report(u"No $SPY data on {}.\n\tIs it a not trading day?\n\tOr, maybe IEX just hasn't updated the data yet?\n".format(trading_day.isoformat()))
+		days_iter += 1
 		continue
 
 	symbol_iter = 0
