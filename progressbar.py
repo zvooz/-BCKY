@@ -114,7 +114,7 @@ class ProgressBar:
             waves		= ['', u'▁', u'▂', u'▃', u'▄', u'▅', u'▆', u'▇', u'█'],
             position	= 0
             ):
-        """
+        u"""
 		printProgressBar() - Print iterations progress. Call in a loop to create terminal progress bar.
 		@params:
 			iteration	- Required: current iteration									Int
