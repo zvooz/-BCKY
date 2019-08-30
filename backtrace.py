@@ -151,14 +151,14 @@ big_start_time = datetime.datetime.now()
 
 trading_days = get_trading_days()
 for trading_day in trading_days:
-	progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_day, suffix="done", decimals=2, position=0)
+	progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_day, suffix=u"done", decimals=2, position=0)
 
 	EOD_ohlcv = []
 	BCKY_A_ohlcv = []
 	BCKY_B_ohlcv = []
 	BCKY_V_ohlcv = []
 
-	get_date_query = get_date + trading_day.strftime("%Y%m%d")
+	get_date_query = get_date + trading_day.strftime(u"%Y%m%d")
 
 	# if symbols:
 	# 	if __name__ == '__main__':
@@ -170,14 +170,14 @@ for trading_day in trading_days:
 		SPY_ohlcv = json.loads(
 			requests.get((IEX_baseurl if not testing else IEX_testurl) + get_stock + SPY + get_date_query, params=query_parameters).text)
 	except Exception:
-		progress_bar.wrn_report("WARNING: No $SPY data on {}. Is it not a trading day?\n".format(trading_day.isoformat()))
+		progress_bar.wrn_report(u"No $SPY data on {}. Is it not a trading day?\n".format(trading_day.isoformat()))
 		continue
 
 	if SPY_ohlcv:
 		SPY_df = pandas.DataFrame(SPY_ohlcv)
 		pd_to_csv(os.path.join(directory_elements.portfolios_dir, SPY), SPY_df)
 	else:
-		progress_bar.wrn_report("WARNING: No $SPY data on {}.\n\tIs it a not trading day?\n\tOr, maybe IEX just haven't updated the data yet?\n".format(trading_day.isoformat()))
+		progress_bar.wrn_report(u"No $SPY data on {}.\n\tIs it a not trading day?\n\tOr, maybe IEX just hasn't updated the data yet?\n".format(trading_day.isoformat()))
 		continue
 
 	symbol_iter = 0
@@ -185,7 +185,7 @@ for trading_day in trading_days:
 	small_start_time = datetime.datetime.now()
 
 	for symbol in symbols:
-		progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=symbol, suffix="done", decimals=2, position=1)
+		progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=symbol, suffix=u"done", decimals=2, position=1)
 		
 		try:
 			symbol_ohlcv = json.loads(
@@ -207,9 +207,9 @@ for trading_day in trading_days:
 		
 		symbol_iter += 1
 		
-		time.sleep(0.1)
+		time.sleep(0.05)
 	
-	progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=symbol, suffix="done", decimals=2, position=1)
+	progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=symbol, suffix=u"done", decimals=2, position=1)
 
 	if EOD_ohlcv:
 		EOD_df = dict_to_DataFrame(EOD_ohlcv)
@@ -226,6 +226,6 @@ for trading_day in trading_days:
 	
 	days_iter += 1
 	
-	time.sleep(0.1)
+	time.sleep(0.05)
 
-progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_day, suffix="done", decimals=2, position=0)
+progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_day, suffix=u"done", decimals=2, position=0)
