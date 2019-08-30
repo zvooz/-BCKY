@@ -84,7 +84,7 @@ class Portfolios:
 		u"SPY" : 1
 	}
 	
-	portfolios = {
+	indices = {
 		u"^BCKY.A": BCKY_A,
 		u"^BCKY.B": BCKY_B,
 		u"^BCKY.V": BCKY_V,
