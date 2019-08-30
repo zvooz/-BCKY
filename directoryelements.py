@@ -10,15 +10,15 @@ class DirectoryElements:
 	def __init__(self):
 		pass
 	
-	ckdirs = "bin64/ckdirs" if platform.architecture()[0] == "64bit" else "bin32/ckdirs"
+	ckdirs = u"bin64/ckdirs" if platform.architecture()[0] == u"64bit" else u"bin32/ckdirs"
 
-	plots_subdir = "plots"
-	portfolios_subdir = "portfolios"
-	EODs_subdir = "aggregated EODs"
-	BCKY_A_subdir = "^BCKY.A"
-	BCKY_B_subdir = "^BCKY.B"
-	BCKY_V_subdir = "^BCKY.V"
-	RTRD_subdir = "^RTRD"
+	plots_subdir = u"plots"
+	portfolios_subdir = u"portfolios"
+	EODs_subdir = u"aggregated EODs"
+	BCKY_A_subdir = u"^BCKY.A"
+	BCKY_B_subdir = u"^BCKY.B"
+	BCKY_V_subdir = u"^BCKY.V"
+	RTRD_subdir = u"^RTRD"
 
 	cur_dir = os.getcwd()
 	plots_dir = os.path.join(cur_dir, plots_subdir)
