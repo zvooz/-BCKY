@@ -50,10 +50,11 @@ class ProgressBar:
     def restore_progress_report(self, ):
         i = 0
         for progress in self.progress_record:
-            self.mv2line(self.current_err_height + i)
-            sys.stdout.write(str(progress))
-            sys.stdout.flush()
-            i += 1
+            if progress:
+                self.mv2line(self.current_err_height + i)
+                sys.stdout.write(progress)
+                sys.stdout.flush()
+                i += 1
 
     def err_report(self, err_msg):
         """not thread-safe"""
@@ -105,12 +106,12 @@ class ProgressBar:
             iteration	= 0,
             total		= 0,
             start_time	= datetime.datetime.now(),
-            prefix		= "",
-            suffix		= "done",
+            prefix		= u"",
+            suffix		= u"done",
             decimals	= 1,
             length		= 100,
-            fills		= ["", "▏", "▎", "▍", "▌", "▋", "▊", "▉", "█"],
-            waves		= ["", "▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+            fills		= [u'', u'▏', u'▎', u'▍', u'▌', u'▋', u'▊', u'▉', u'█'],
+            waves		= ['', u'▁', u'▂', u'▃', u'▄', u'▅', u'▆', u'▇', u'█'],
             position	= 0
             ):
         """
@@ -135,7 +136,7 @@ class ProgressBar:
         minutes_left = secs_in_time / 60
         seconds_left = secs_in_time % 60
 
-        percent = ("{0:." + str(decimals) + "f}").format(100 * ((iteration / float(total)) if total != 0 else 1))
+        percent = (u"{0:." + str(decimals) + u"f}").format(100 * ((iteration / float(total)) if total != 0 else 1))
 
         if total == 0:
             big_length = length
@@ -145,12 +146,12 @@ class ProgressBar:
             big_length = int(ratio_done)
             smo_length = int((ratio_done % 1) * (len(fills) - 1))
 
-        bar = fills[-1] * big_length + fills[smo_length] + "-" * (length - big_length - (1 if smo_length > 0 else 0))
+        bar = fills[-1] * big_length + fills[smo_length] + u'-' * (length - big_length - (1 if smo_length > 0 else 0))
 
-        progress = "\r%-30s |%s| %6s%% %s (%4d/%-4d)\ttime remaining: %3d:%02d\r" % (prefix, green(bar), percent, suffix, iteration, total, minutes_left, seconds_left)
+        progress = u"\r%-30s |%s| %6s%% %s (%4d/%-4d)\ttime remaining: %3d:%02d\r" % (prefix, green(bar), percent, suffix, iteration, total, minutes_left, seconds_left)
         self.progress_record[position] = progress
         self.mv2line(self.current_err_height + position)
-        sys.stdout.write(str(progress))
+        sys.stdout.write(progress)
         sys.stdout.flush()
         self.mv2line(self.current_err_height + self.progress_report_count)
 
