@@ -1,0 +1,13 @@
+terminalcontroller.py is by adamlabadorf (https://github.com/adamlabadorf/terminalcontroller).
+It is modified after Active State's original code (http://code.activestate.com/recipes/475116/).
+The original code is also available on github as of writing of this license (https://github.com/ActiveState/code/blob/master/recipes/Python/475116_Using_terminfo_portable_color_output__cursor/recipe-475116.py).
+I claim no ownership, nor any copyright over terminalcontroller.py.
+
+the README file for terminalcontroller.py is also by adamlabadorf.
+
+The original license is copied below the line:
+-------------------------------------------------------
+
+Copyright 2006 Edward Loper
+
+The software is licensed according to the terms of the PSF (Python Software Foundation) license found here: http://www.python.org/psf/license/

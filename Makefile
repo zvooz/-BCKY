@@ -17,7 +17,7 @@ CLANG = clang++
 CXX = $(GCC)
 
 # General flags
-CXXFLAGS = -march=native -Ofast -fopenmp -D_GLIBCXX_PARALLEL
+CXXFLAGS = -march=native -Ofast -D_GLIBCXX_PARALLEL
 
 # Compiler-specific flags
 GCCFLAGS = -frename-registers
@@ -34,6 +34,9 @@ PGOUSE_ISTR = -fprofile-instr-use
 # Clang PGO sampling profiler flags http://clang.llvm.org/docs/UsersManual.html#profile-guided-optimization
 PGOGEN_SMPL = -g
 PGOUSE_SMPL = -fprofile-sample-use
+
+# OpenMP flags
+OMP = -fopenmp
 
 # Best to be safe...
 .DEFAULT_GOAL = all
