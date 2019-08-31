@@ -16,14 +16,14 @@ class Portfolios:
 	
 	# ^BCKY.A or ^BCKYA, the primary ^BCKY portfolio
 	BCKY_A = {
-		u"AAPL" : 5,
-		u"ETSY" : 15,
-		u"LULU" : 6,
-		MC	    :	3,
+		u"AAPL"	: 5,
+		u"ETSY"	: 15,
+		u"LULU"	: 6,
+		MC		:	3,
 		OR		:	4,
-		u"PLNT" :	15,
-		u"SBUX" :	14,
-		u"ULTA" :	3
+		u"PLNT"	:	15,
+		u"SBUX"	:	14,
+		u"ULTA"	:	3
 	}
 
 	# ^BCKY.B or ^BCKYB, the secondary ^BCKY portfolio, a superset of ^BCKY.A or ^BCKYA
@@ -77,17 +77,17 @@ class Portfolios:
 	
 	# ^RTRD, the r/WallStreetBets Retard Portfolio
 	RTRD = {
-		u"BYND" :   22
+		u"BYND"	:   22
 	}
 	
 	SPY = {
-		u"SPY" : 1
+		u"SPY"	: 1
 	}
 	
 	indices = {
-		u"^BCKY.A": BCKY_A,
-		u"^BCKY.B": BCKY_B,
-		u"^BCKY.V": BCKY_V,
-		u"^RTRD": RTRD,
-		u"$SPY": SPY
+		u"^BCKY.A"	: BCKY_A,
+		u"^BCKY.B"	: BCKY_B,
+		u"^BCKY.V"	: BCKY_V,
+		u"^RTRD"	: RTRD,
+		u"$SPY"		: SPY
 	}
