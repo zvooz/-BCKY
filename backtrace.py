@@ -61,11 +61,18 @@ progress_bar = ProgressBar(progress_report_count=2)
 
 def get_trading_days_all(ftp):
 	templist = []
+	
 	for filename in ftp.nlst()[2:]:
 		try:
 			templist.append(datetime.datetime.strptime(filename, u"CrossStats%Y%m%d.txt").date())
 		except Exception:
 			continue
+			
+	templist.sort()
+	
+	if len(templist) > 0:
+		del templist[-1]
+	
 	return set(templist)
 
 
@@ -222,7 +229,7 @@ for trading_day in trading_days:
 		
 		symbol_iter += 1
 		
-		time.sleep(0.05)
+		time.sleep(0.025)
 	
 	progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=symbol, suffix=u"done", decimals=2, position=1)
 
@@ -235,6 +242,6 @@ for trading_day in trading_days:
 	
 	days_iter += 1
 	
-	time.sleep(0.05)
+	time.sleep(0.025)
 
 progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_day, suffix=u"done", decimals=2, position=0)
