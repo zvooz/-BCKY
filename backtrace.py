@@ -17,7 +17,7 @@ import requests
 import sys
 import time
 
-testing = True  # True for development and testing, False for production
+testing = False  # True for development and testing, False for production
 poolsize = multiprocessing.cpu_count()  # make my cpu cry!
 
 NASDAQ_ftp = u"ftp.nasdaqtrader.com"
