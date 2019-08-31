@@ -85,7 +85,7 @@ def plot_comparison():
 			go.Scatter(
 				{
 					u"x": indices_ohlcvs[index].index,
-					u"y": indices_ohlcvs[index][col_c] / indices_ohlcvs[index][col_c].iloc[0],
+					u"y": (indices_ohlcvs[index][col_c] / indices_ohlcvs[index][indices_ohlcvs[index][col_c] > 0][col_c].iloc[0]).where(indices_ohlcvs[index][col_c] > 0, 1) - 1,
 					u"name": index,
 					u"opacity": 0.8,
 					u"mode": u"lines"
@@ -176,8 +176,8 @@ def plot_all():
 
 
 def track(index):
-	data = {
-		trading_day: pandas.read_csv(os.path.join(directory_elements.indices_dirs[index], trading_day))[ohlcv_cols].sum(axis=0).to_dict() for trading_day in trading_days}
+	weight = pandas.DataFrame.from_dict({symbol: [portfolios.indices[index][symbol]] for symbol in portfolios.indices[index].keys()})
+	data = {trading_day: weight.dot(pandas.read_csv(os.path.join(directory_elements.indices_dirs[index], trading_day)).set_index(symbol_column)[ohlcv_cols]).sum(axis=0).to_dict() for trading_day in trading_days}
 	return pandas.DataFrame.from_dict(data, orient=u"index")
 
 
