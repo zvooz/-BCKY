@@ -66,7 +66,7 @@ progress_bar = ProgressBar(progress_report_count=2)
 # }
 
 
-def plot_comparison():
+def plot_comparison(indices):
 	data_layout = go.Figure(
 		layout={
 			u"xaxis": {
@@ -80,7 +80,7 @@ def plot_comparison():
 		}
 	)
 	
-	for index in portfolios.indices.keys():
+	for index in indices:
 		data_layout.add_trace(
 			go.Scatter(
 				{
@@ -169,10 +169,14 @@ def plot_candlesticks(index):
 
 
 def plot_all():
-	for index in portfolios.indices.keys():
+	indices = portfolios.indices.keys()
+	indices.sort()
+	
+	for index in indices:
 		plot_candlesticks(index)
 		plot_mountains(index)
-	plot_comparison()
+	
+	plot_comparison(indices)
 
 
 def track(index):
