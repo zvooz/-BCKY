@@ -86,7 +86,19 @@ class Portfolios:
 	BCKY_V.update(BCKY_BV)
 	
 	
-	# ^RTRD, the r/WallStreetBets Retard Portfolio
+	# ^KREN; "Faceplace is Instaspam for old dried up Beckies"
+	KREN = {
+		u"TGT"	:	15,
+		u"KSS"	:	15,
+		u"SBUX"	:	16,
+		u"ADDYY":	9,
+		u"FB"	:	8,
+		u"TM"	:	9,
+		u"AVP"	:	676
+	}
+	
+	
+	# ^RTRD, the r/WallStreetBets' Retard Portfolio
 	RTRD = {
 		u"BYND"	:   22
 	}
