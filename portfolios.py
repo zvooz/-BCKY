@@ -7,82 +7,95 @@ class Portfolios:
 	def __init__(self):
 		pass
 	
-	epoch = datetime.date(2019, 3, 28)
+	epoch = datetime.date(2019, 1, 1)
+	
 	
 	# MC = u"MC.PA"
 	MC = u"LVMHF"
 	# OR = u"OR.PA"
 	OR = u"LRLCF"
 	
+	
+	# ^BCKY, the part that's common to all ^BCKY's
+	BCKY = {
+		# US equities
+		u"AAPL"	:	6,
+		u"ETSY"	:	22,
+		u"LULU"	:	8,
+		u"ULTA"	:	4,
+		u"SBUX"	:	16,
+		
+		# non-US equities
+		MC		:	3,
+		OR		:	4
+	}
+	
+	
+	# ^BCKY.BV or ^BCKYBV, common to both ^BCKY.B and ^BCKY.V, but not ^BCKY.A
+	BCKY_BV = {
+		# US equities
+		u"DECK": 8,
+		u"EL": 8,
+		u"LB": 40,
+		u"NKE": 14,
+		u"UAA": 57,
+		
+		# non-US equities
+		u"DEO": 7,
+		
+		# community consensus
+		u"FIZZ": 14,
+		u"NFLX": 4,
+		u"SNAP": 186,
+		u"TGT": 15,
+		u"TIF": 13
+	}
+	
+	
 	# ^BCKY.A or ^BCKYA, the primary ^BCKY portfolio
 	BCKY_A = {
-		u"AAPL"	: 5,
-		u"ETSY"	: 15,
-		u"LULU"	: 6,
-		MC		:	3,
-		OR		:	4,
-		u"PLNT"	:	15,
-		u"SBUX"	:	14,
-		u"ULTA"	:	3
+		# US equities
+		u"PLNT"	:	19
 	}
-
+	BCKY_A.update(BCKY)
+	
+	
 	# ^BCKY.B or ^BCKYB, the secondary ^BCKY portfolio, a superset of ^BCKY.A or ^BCKYA
 	BCKY_B = {
-		u"COTY"	:	87,
-		u"DECK"	:	7,
-		u"DEO"	:	6,
-		u"EL"	:	6,
-		u"LB"	:	36,
-		u"FIZZ"	:	18,
-		u"NFLX"	:	3,
-		u"NKE"	:	12,
-		u"SNAP"	:	93,
-		u"TGT"	:	12,
-		u"TIF"	:	10,
-		u"UAA"	:	47,
-		u"VFC"	:	11
+		# US equities
+		u"COTY"	:	155,
+		u"VFC"	:	15
 	}
 	BCKY_B.update(BCKY_A)
-
+	BCKY_B.update(BCKY_BV)
+	
+	
 	# ^BCKY.V or ^BCKYV, the Founders Edition
 	BCKY_V = {
 		# US equities, original
-		u"AAPL"	:	5,
-		u"DECK"	:	7,
 		u"DIS"	:	9,
-		u"EL"	:	6,
-		u"FB"	:	6,
-		u"LB"	:	36,
-		u"LULU"	:	6,
-		u"NKE"	:	12,
-		u"SBUX"	:	14,
-		u"UAA"	:	47,
-		u"ULTA"	:	3,
+		u"FB"	:	8,
 
 		# non-US equities, original
-		u"ADDYY":	8,
-		u"DEO"	:	6,
-		u"LRLCY":	19,
-		u"LVMUY":	14,
+		u"ADDYY":	9,
 
 		# community consensus
-		u"ETSY"	:	15,
-		u"FIZZ"	:	18,
-		u"GOOS"	:	21,
-		u"NFLX"	:	3,
-		u"SNAP"	:	93,
-		u"TGT"	:	12,
-		u"TIF"	:	10
+		u"GOOS"	:	23,
 	}
+	BCKY_V.update(BCKY)
+	BCKY_V.update(BCKY_BV)
+	
 	
 	# ^RTRD, the r/WallStreetBets Retard Portfolio
 	RTRD = {
 		u"BYND"	:   22
 	}
 	
+	
 	SPY = {
 		u"SPY"	: 1
 	}
+	
 	
 	indices = {
 		u"^BCKY.A"	: BCKY_A,
