@@ -34,21 +34,21 @@ class Portfolios:
 	# ^BCKY.BV or ^BCKYBV, common to both ^BCKY.B and ^BCKY.V, but not ^BCKY.A
 	BCKY_BV = {
 		# US equities
-		u"DECK": 8,
-		u"EL": 8,
-		u"LB": 40,
-		u"NKE": 14,
-		u"UAA": 57,
+		u"DECK"	:	8,
+		u"EL"	:	8,
+		u"LB"	:	40,
+		u"NKE"	:	14,
+		u"UAA"	:	57,
 		
 		# non-US equities
-		u"DEO": 7,
+		u"DEO"	:	7,
 		
 		# community consensus
-		u"FIZZ": 14,
-		u"NFLX": 4,
-		u"SNAP": 186,
-		u"TGT": 15,
-		u"TIF": 13
+		u"FIZZ"	:	14,
+		u"NFLX"	:	4,
+		u"SNAP"	:	186,
+		u"TGT"	:	15,
+		u"TIF"	:	13
 	}
 	
 	
@@ -93,7 +93,7 @@ class Portfolios:
 	
 	
 	SPY = {
-		u"SPY"	: 1
+		u"SPY"	:	1
 	}
 	
 	
