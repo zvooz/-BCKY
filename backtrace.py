@@ -6,6 +6,7 @@ from dateutil import rrule, parser
 from ftplib import FTP
 from typing import List, Any
 from directoryelements import DirectoryElements
+import getopt
 import json
 import multiprocessing
 import multiprocessing.dummy as mpd
@@ -57,6 +58,22 @@ columns_to_remove = [
 portfolios = Portfolios()
 directory_elements = DirectoryElements()
 progress_bar = ProgressBar(progress_report_count=2)
+
+
+def main(argv):
+	global testing
+	help = u"backtrace.py [OPTIONS]\n\nOPTIONS\n\t-h, --help\n\t\tDisplay this helpful manual.\n\t-t, --test\n\t\tUse IEX's sandbox test data."
+	try:
+		opts, args = getopt.getopt(argv, u"ht", u"test")
+	except getopt.GetoptError:
+		progress_bar.report(help)
+		sys.exit(2)
+	for opt, arg in opts:
+		if opt == (u"-h", u"--help"):
+			progress_bar.report(help)
+			sys.exit()
+		elif opt in (u"-t", u"--test"):
+			testing = True
 
 
 def get_trading_days_all(ftp):
@@ -245,3 +262,7 @@ for trading_day in trading_days:
 	time.sleep(0.025)
 
 progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_day, suffix=u"done", decimals=2, position=0)
+
+
+if __name__ == "__main__":
+	main(sys.argv[1:])
