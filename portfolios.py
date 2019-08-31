@@ -110,9 +110,10 @@ class Portfolios:
 	
 	
 	indices = {
-		u"^BCKY.A"	: BCKY_A,
-		u"^BCKY.B"	: BCKY_B,
-		u"^BCKY.V"	: BCKY_V,
-		u"^RTRD"	: RTRD,
-		u"$SPY"		: SPY
+		u"^BCKY.A"	:	BCKY_A,
+		u"^BCKY.B"	:	BCKY_B,
+		u"^BCKY.V"	:	BCKY_V,
+		u"^KREN"	:	KREN,
+		u"^RTRD"	:	RTRD,
+		u"$SPY"		:	SPY
 	}
