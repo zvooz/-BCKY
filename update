@@ -38,4 +38,4 @@ fi
 rm indices.md
 touch indices.md
 python chartmedaddy.py
-pandoc head.md indices.md tail.md > README.md
+cat head.md indices.md tail.md > README.md
