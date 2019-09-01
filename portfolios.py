@@ -58,6 +58,7 @@ class Portfolios:
 		u"PLNT"	:	19
 	}
 	BCKY_A.update(BCKY)
+	md_BCKY_A = u"^BCKY.A tracks the fewest stocks. It uses the composition from [this post](https://www.reddit.com/r/wallstreetbets/comments/b6hvdf/i_indexed_beckys_portfolio_so_you_dont_have_to/)."
 	
 	
 	# ^BCKY.B or ^BCKYB, the secondary ^BCKY portfolio, a superset of ^BCKY.A or ^BCKYA
@@ -68,6 +69,7 @@ class Portfolios:
 	}
 	BCKY_B.update(BCKY_A)
 	BCKY_B.update(BCKY_BV)
+	md_BCKY_B = u"^BCKY.B is a much longer, and possibly over-done extension to ^BCKY.A. It uses the composition from [this post](https://www.reddit.com/r/wallstreetbets/comments/b6mudk/bcky_update_wsb_was_right_diversification_bad/). In addition to what is in ^BCKY.A, it has the following components:"
 	
 	
 	# ^BCKY.V or ^BCKYV, the Founders Edition
@@ -84,9 +86,10 @@ class Portfolios:
 	}
 	BCKY_V.update(BCKY)
 	BCKY_V.update(BCKY_BV)
+	md_BCKY_V = u"^BCKY.V uses the composition from [that r/investing post](https://www.reddit.com/r/investing/comments/9n31xf/introducing_the_white_girl_index/)."
 	
 	
-	# ^KREN; "Faceplace is Instaspam for old dried up Beckies"
+	# ^KREN; "Faceplace is Instaspam for old dried up Beckies" ― u/Doc_Emmett_L_Brown
 	KREN = {
 		u"TGT"	:	15,
 		u"KSS"	:	15,
@@ -96,24 +99,29 @@ class Portfolios:
 		u"TM"	:	9,
 		u"AVP"	:	676
 	}
+	md_KREN = u"^KREN is from [this r/WallStreetBets post](https://www.reddit.com/r/wallstreetbets/comments/craedi/buy_the_karen/).\n> Faceplace is Instaspam for old dried up Beckies\n\t― [u/Doc_Emmett_L_Brown](https://www.reddit.com/user/Doc_Emmett_L_Brown/)"
 	
 	
 	# ^RTRD, the r/WallStreetBets' Retard Portfolio
 	RTRD = {
-		u"BYND"	:   22
+		u"BYND"	:   22,
+		u"SHMP"	:	54054,
+		u"YRIV"	:	267
 	}
+	md_RTRD = u"Just like the WSB, ^RTRD's components are all very retarded. It's quite self-explanatory."
 	
 	
 	SPY = {
 		u"SPY"	:	1
 	}
+	md_SPY = u"Not one day goes by without a $SPY FD post on the WSB."
 	
 	
 	indices = {
-		u"^BCKY.A"	:	BCKY_A,
-		u"^BCKY.B"	:	BCKY_B,
-		u"^BCKY.V"	:	BCKY_V,
-		u"^KREN"	:	KREN,
-		u"^RTRD"	:	RTRD,
-		u"$SPY"		:	SPY
+		u"^BCKY.A"	:	[BCKY_A, md_BCKY_A],
+		u"^BCKY.B"	:	[BCKY_B, md_BCKY_B],
+		u"^BCKY.V"	:	[BCKY_V, md_BCKY_V],
+		u"^KREN"	:	[KREN, md_KREN],
+		u"^RTRD"	:	[RTRD, md_RTRD],
+		u"$SPY"		:	[SPY, md_SPY]
 	}
