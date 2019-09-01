@@ -32,3 +32,4 @@ else
 	python backtrace.py
 fi
 python chartmedaddy.py
+pandoc head.md indices.md tail.md > README.md
