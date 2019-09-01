@@ -217,7 +217,7 @@ days_iter = 0
 
 big_start_time = datetime.datetime.now()
 
-print (u"receiving {} data from IEX...".format(u"sandbox test" if testing else u"real"))
+print (u"\nreceiving {} data from IEX...\n".format(u"sandbox test" if testing else u"real"))
 
 trading_days = get_trading_days()
 for trading_day in trading_days:
@@ -282,7 +282,7 @@ for trading_day in trading_days:
 		
 		symbol_iter += 1
 		
-		time.sleep(0.025)
+		# time.sleep(0.005)
 	
 	progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=u"all tickers", suffix=u"done", decimals=2, position=1)
 
@@ -295,6 +295,6 @@ for trading_day in trading_days:
 	
 	days_iter += 1
 	
-	time.sleep(0.025)
+	# time.sleep(0.005)
 
 progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_days[-1], suffix=u"done", decimals=2, position=0)
