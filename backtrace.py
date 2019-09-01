@@ -189,11 +189,13 @@ def get_trading_days():
 
 def dict_to_df(index_dict):
 	index_df = pandas.DataFrame(index_dict)
+	index_df.drop_duplicates()
 	index_df_columns = index_df.columns.tolist()
 	index_df_columns.remove(symbol_column)
 	index_df_columns.insert(0, symbol_column)
 	index_df = index_df[index_df_columns]
 	index_df.sort_values(by=symbol_column)
+	index_df.drop_duplicates()
 	return index_df
 
 
@@ -287,8 +289,7 @@ for trading_day in trading_days:
 	progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=u"all tickers", suffix=u"done", decimals=2, position=1)
 
 	if EOD_ohlcv:
-		EOD_df = dict_to_df(EOD_ohlcv)
-		pd_to_csv(os.path.join(directory_elements.EODs_dir, trading_day.isoformat()), EOD_df)
+		pd_to_csv(os.path.join(directory_elements.EODs_dir, trading_day.isoformat()), dict_to_df(EOD_ohlcv))
 	
 	for index in portfolios.indices.keys():
 		pd_to_csv(os.path.join(directory_elements.indices_dirs[index], trading_day.isoformat()), dict_to_df(indices_ohlcvs[index]))
@@ -297,4 +298,4 @@ for trading_day in trading_days:
 	
 	# time.sleep(0.005)
 
-progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_days[-1], suffix=u"done", decimals=2, position=0)
+progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_days[-1] if trading_days else u"already up-to-date", suffix=u"done", decimals=2, position=0)
