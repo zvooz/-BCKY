@@ -1,3 +1,5 @@
+TEST=false
+
 while getopts ht option; do
 	case "${option}" in
 		h)
@@ -18,12 +20,14 @@ while getopts ht option; do
 			echo "${bold}AUTHOR${normal}"
 			echo "\tzvooz (https://github.com/zvooz)\n"
 			exit 0
+			break
 			;;
 		t)
-			TEST=true;;
+			TEST=true
+			break
+			;;
 	esac
 done
-
 
 make
 if $TEST; then
