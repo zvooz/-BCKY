@@ -35,5 +35,7 @@ if $TEST; then
 else
 	python backtrace.py
 fi
+rm indices.md
+touch indices.md
 python chartmedaddy.py
 pandoc head.md indices.md tail.md > README.md
