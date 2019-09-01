@@ -28,16 +28,16 @@ cd -BCKY
 
 
 <p>
-	Data provided for free by <a href="https://iextrading.com/developer">IEX</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>
+	Data provided for free by <a href="https://iextrading.com/developer">IEX Cloud</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>
 	<sub>
 		<a href="https://www.iexcloud.io">
-			<img src=“doc/assets/IEX/logo-color.svg“ />
+			<img src=“docs/assets/IEX/logo-color.svg“ width="80" height="25"/>
 		</a>
 	</sub>
 </p>
 
 <a href="http://www.wtfpl.net/">
-	<img src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png" width="80" height="15" alt="WTFPL" />
+	<img src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png" height="30" alt="WTFPL" />
 </a>
 
 <script type="text/javascript">
