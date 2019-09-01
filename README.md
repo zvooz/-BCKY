@@ -28,11 +28,11 @@ SPY|1
 
 $SPY candlestick chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/$SPY candlestick.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/$SPY candlestick.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 $SPY mountain chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/$SPY mountain.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/$SPY mountain.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ### ^BCKY.A
 
@@ -51,11 +51,11 @@ ULTA|4
 
 ^BCKY.A candlestick chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.A candlestick.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^BCKY.A candlestick.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ^BCKY.A mountain chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.A mountain.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^BCKY.A mountain.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ### ^BCKY.B
 
@@ -87,11 +87,11 @@ VFC|15
 
 ^BCKY.B candlestick chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.B candlestick.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^BCKY.B candlestick.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ^BCKY.B mountain chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.B mountain.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^BCKY.B mountain.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ### ^BCKY.V
 
@@ -124,11 +124,11 @@ ULTA|4
 
 ^BCKY.V candlestick chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.V candlestick.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^BCKY.V candlestick.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ^BCKY.V mountain chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.V mountain.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^BCKY.V mountain.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ### ^KREN
 
@@ -148,11 +148,11 @@ TM|9
 
 ^KREN candlestick chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^KREN candlestick.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^KREN candlestick.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ^KREN mountain chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^KREN mountain.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^KREN mountain.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ### ^RTRD
 
@@ -166,14 +166,14 @@ YRIV|267
 
 ^RTRD candlestick chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^RTRD candlestick.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^RTRD candlestick.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ^RTRD mountain chart:
 
-<iframe style="border:none;" seamless="seamless" src="docs/plots/^RTRD mountain.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/^RTRD mountain.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ### performance comparison between indices:
-<iframe style="border:none;" seamless="seamless" src="docs/plots/comparison.html"></iframe>
+<iframe id="chart-iframe" scrolling="no" style="margin:0; border:none; overflow:hidden;" seamless="seamless" src="docs/plots/comparison.html" height="525" width="100%" onload="AdjustIframeHeightOnLoad()"></iframe>
 
 ## caveats
 
@@ -216,4 +216,10 @@ cd -BCKY
 <a href="http://www.wtfpl.net/">
 	<img src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png" width="80" height="15" alt="WTFPL" />
 </a>
+
+<script type="text/javascript">
+    function AdjustIframeHeightOnLoad() { document.getElementById("chart-iframe").style.height = document.getElementById("chart-iframe").contentWindow.document.body.scrollHeight + "px"; }
+    function AdjustIframeHeight(i) { document.getElementById("chart-iframe").style.height = parseInt(i) + "px"; }
+</script>
+
 
