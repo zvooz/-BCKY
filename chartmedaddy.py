@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*- 
 
+import chart_studio.tools as tls
 import datetime
 from directoryelements import DirectoryElements
 import os
@@ -17,6 +18,8 @@ col_c = u"close"
 col_v = u"volume"
 ohlcv_cols = [col_o, col_h, col_l, col_c, col_v]
 symbol_column = u"symbol"
+
+md_str = u"\n"
 
 portfolios = Portfolios()
 directory_elements = DirectoryElements()
@@ -66,6 +69,16 @@ progress_bar = ProgressBar(progress_report_count=2)
 # }
 
 
+def generate_md(index, link_candlestick, link_mountain):
+	global md_str
+	md_str += u"## Fantasy Indices\n\nThe following are the descriptions and performances of indices currently tracked by this project. This section is automatically generated whenever the indices are updated. charts might not show up because of [this](https://github.github.com/gfm/#disallowed-raw-html-extension-).\n### {}\n\n{}\n\ncomponent|weight\n---------|------\n".format(index, portfolios.indices[index][1])
+	tickers = portfolios.indices[index][0].keys()
+	tickers.sort()
+	md_str += u"{}\n\n".format(u'\n'.join([u"{}|{}".format(ticker, portfolios.indices[index][0][ticker]) for ticker in tickers]))
+	iframe_tag = u"<iframe style=\"border:none;\" seamless=\"seamless\" src=\"{}\"></iframe>"
+	md_str += u"{} candlestick chart:\n{}\n\n{} mountain chart:\n{}\n\n".format(index, iframe_tag.format(link_candlestick), index, iframe_tag.format(link_mountain))
+
+
 def plot_comparison(indices):
 	data_layout = go.Figure(
 		layout={
@@ -95,17 +108,21 @@ def plot_comparison(indices):
 	
 	# data_layout.update_layout(std_slider, xaxis_range=[trading_days[0], trading_days[-1]], title_text=u"comparisons")
 	
+	filename = os.path.join(DirectoryElements.plots_subdir, u"comparison.html")
+	
 	plotly.offline.plot(
 		data_layout,
-		filename=DirectoryElements.plots_dir + u"/comparison.html",
+		filename=filename,
 		auto_open=False,
 		image_filename=u"all mountain",
 		include_mathjax=u"cdn",
 		auto_play=False
 	)
+	
+	return filename
 
 
-def plot_mountains(index):
+def plot_mountain(index):
 	data_layout = go.Figure(
 		data=[
 			go.Scattergl(
@@ -132,17 +149,21 @@ def plot_mountains(index):
 	
 	# data_layout.update_layout(std_slider, xaxis_range=[trading_days[0], trading_days[-1]])
 	
+	filename = os.path.join(DirectoryElements.plots_subdir, index + u" mountain.html")
+	
 	plotly.offline.plot(
 		data_layout,
-		filename=DirectoryElements.plots_dir + u'/' + index + u" mountain.html",
+		filename=filename,
 		auto_open=False,
 		image_filename=index + u" mountain",
 		include_mathjax=u"cdn",
 		auto_play=False
 	)
+	
+	return filename
 
 
-def plot_candlesticks(index):
+def plot_candlestick(index):
 	data_layout = go.Figure(
 		data=[
 			go.Candlestick(
@@ -158,14 +179,18 @@ def plot_candlesticks(index):
 		]
 	)
 	
+	filename = os.path.join(DirectoryElements.plots_subdir, index + u" candlestick.html")
+	
 	plotly.offline.plot(
 		data_layout,
-		filename=DirectoryElements.plots_dir + u'/' + index + u" candlestick.html",
+		filename=filename,
 		auto_open=False,
 		image_filename=index + u" candlestick",
 		include_mathjax=u"cdn",
 		auto_play=False
 	)
+	
+	return filename
 
 
 def plot_all():
@@ -173,14 +198,15 @@ def plot_all():
 	indices.sort()
 	
 	for index in indices:
-		plot_candlesticks(index)
-		plot_mountains(index)
+		link_candlestick = plot_candlestick(index)
+		link_mountain = plot_mountain(index)
+		generate_md(index, link_candlestick, link_mountain)
 	
-	plot_comparison(indices)
+	link_comparison = plot_comparison(indices)
 
 
 def track(index):
-	weight = pandas.DataFrame.from_dict({symbol: [portfolios.indices[index][symbol]] for symbol in portfolios.indices[index].keys()})
+	weight = pandas.DataFrame.from_dict({symbol: [portfolios.indices[index][0][symbol]] for symbol in portfolios.indices[index][0].keys()})
 	data = {trading_day: weight.dot(pandas.read_csv(os.path.join(directory_elements.indices_dirs[index], trading_day)).set_index(symbol_column)[ohlcv_cols]).sum(axis=0).to_dict() for trading_day in trading_days}
 	return pandas.DataFrame.from_dict(data, orient=u"index")
 
@@ -191,3 +217,7 @@ trading_days.sort()
 indices_ohlcvs = {index: track(index) for index in portfolios.indices.keys()}
 
 plot_all()
+
+md_file = open(u"indices.md", u'w')
+md_file.write(md_str.encode('utf8'))
+md_file.close()
