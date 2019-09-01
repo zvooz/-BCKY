@@ -131,7 +131,8 @@ def plot_mountain(index):
 					u"y": indices_ohlcvs[index][col_c],
 					u"name": index,
 					u"opacity": 0.8,
-					u"mode": u"lines"
+					u"mode": u"lines",
+					u"fill": u"tozeroy"
 				}
 			)
 		],
@@ -146,6 +147,8 @@ def plot_mountain(index):
 		}
 		
 	)
+	
+	data_layout.update_layout(xaxis_rangeslider_visible=True)
 	
 	# data_layout.update_layout(std_slider, xaxis_range=[trading_days[0], trading_days[-1]])
 	
