@@ -1,0 +1,4 @@
+symbol,change,changeOverTime,changePercent,close,high,low,open,uClose,uHigh,uLow,uOpen,uVolume,volume
+YRIV,0,0,0,1.51,1.62,1.46,1.61,1.51,1.62,1.46,1.61,3560701,3560701
+SHMP,0,0,0,0.188,0.192,0.185,0.1885,0.188,0.192,0.185,0.1885,2089395,2089395
+BYND,0,0,0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0,0
