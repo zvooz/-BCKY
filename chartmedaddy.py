@@ -20,7 +20,7 @@ ohlcv_cols = [col_o, col_h, col_l, col_c, col_v]
 symbol_column = u"symbol"
 
 md_str = u"\n"
-iframe_tag = u"<iframe style=\"border:none;\" seamless=\"seamless\" src=\"{}\"></iframe>"
+iframe_tag = u"<iframe id=\"chart-iframe\" scrolling=\"no\" style=\"margin:0; border:none; overflow:hidden;\" seamless=\"seamless\" src=\"{}\" height=\"525\" width=\"100%\" onload=\"AdjustIframeHeightOnLoad()\"></iframe>"
 
 portfolios = Portfolios()
 directory_elements = DirectoryElements()
