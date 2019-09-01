@@ -15,7 +15,7 @@ class DirectoryElements:
 	
 	ckdirs = u"ckdirs"
 	
-	plots_subdir = u"plots"
+	plots_subdir = os.path.join(u"docs", u"plots")
 	portfolios_subdir = u"portfolios"
 	EODs_subdir = u"aggregated EODs"
 	indices_subdirs = portfolios.indices.keys()
