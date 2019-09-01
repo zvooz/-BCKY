@@ -40,3 +40,9 @@ cd -BCKY
 	<img src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-1.png" width="80" height="15" alt="WTFPL" />
 </a>
 
+<script type="text/javascript">
+    function AdjustIframeHeightOnLoad() { document.getElementById("chart-iframe").style.height = document.getElementById("chart-iframe").contentWindow.document.body.scrollHeight + "px"; }
+    function AdjustIframeHeight(i) { document.getElementById("chart-iframe").style.height = parseInt(i) + "px"; }
+</script>
+
+
