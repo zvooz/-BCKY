@@ -11,6 +11,7 @@ class ProgressBar:
     progress_report_count = 0
     progress_record = []
 
+
     def __init__(self,
                  current_height=0,
                  current_err_height=0,
@@ -22,6 +23,7 @@ class ProgressBar:
         self.progress_report_count = progress_report_count
         self.progress_record = progress_record
 
+
     def mv_line_by(self, delta_height=0):
         """not thread-safe"""
         term = TerminalController()
@@ -31,8 +33,10 @@ class ProgressBar:
             sys.stdout.flush()
         self.current_height += delta_height
 
+
     def mv2line(self, new_height):
         self.mv_line_by(new_height - self.current_height)
+
 
     def rm_line(self, line_height=current_height):
         self.mv2line(line_height)
@@ -42,10 +46,12 @@ class ProgressBar:
         sys.stdout.write(term.CLEAR_BOL)
         sys.stdout.flush()
 
+
     def rm_progress_lines(self, line_count=progress_report_count):
         for i in range(0, line_count):
             self.rm_line(line_height=self.current_err_height + line_count)
         self.mv2line(self.current_err_height)
+
 
     def restore_progress_report(self, ):
         i = 0
@@ -55,7 +61,32 @@ class ProgressBar:
                 sys.stdout.write(progress)
                 sys.stdout.flush()
                 i += 1
+    
+    
+    def report(self, msg):
+        """not thread-safe"""
 
+        old_height = self.current_height
+
+        msg = str(msg)
+
+        try:
+            newline_count = msg.count("\n") + 1
+        except:
+            newline_count = 1
+
+        self.rm_progress_lines(line_count=self.progress_report_count)
+        normal(msg)
+        self.mv_line_by(1)
+
+        self.current_err_height += newline_count
+
+        self.rm_progress_lines(line_count=self.progress_report_count)
+        self.restore_progress_report()
+
+        self.mv2line(old_height + newline_count)
+    
+    
     def err_report(self, err_msg):
         """not thread-safe"""
 
@@ -79,6 +110,7 @@ class ProgressBar:
 
         self.mv2line(old_height + newline_count)
 
+
     def wrn_report(self, wrn_msg):
         """not thread-safe"""
 
@@ -101,6 +133,7 @@ class ProgressBar:
         self.restore_progress_report()
 
         self.mv2line(old_height + newline_count)
+
 
     def out(self,
             iteration	= 0,

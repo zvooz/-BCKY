@@ -1,4 +1,35 @@
+while getopts ht option; do
+	case "${option}" in
+		h)
+			bold=$(tput bold)
+			normal=$(tput sgr0)
+			echo "${bold}NAME${normal}"
+			echo "\t${bold}update${normal} -- update data for project ^BCKY\n"
+			echo "${bold}SYNOPSIS${normal}"
+			echo "\t${bold}update${normal} [-ht]\n"
+			echo "${bold}DESCRIPTION${normal}"
+			echo "\t${bold}update${normal} runs several programs to pull new data from IEX and knit them together into graphs. Overall, it tracks the indices specified in portfolios.py for project ^BCKY. When in development, use the test flag (${bold}-t${normal}) for IEX's sandbox test data.\n"
+			echo "\tThe following options are available:\n"
+			echo "\t${bold}-h${normal}\tDisplay this helpful manual.\n"
+			echo "\t${bold}-t${normal}\tUse IEX's sandbox test data.\n"
+			echo "${bold}EXAMPLES${normal}"
+			echo "\tThe following is how to do a normal update using real data.\n"
+			echo "\t\t./update\n"
+			echo "${bold}AUTHOR${normal}"
+			echo "\tzvooz (https://github.com/zvooz)\n"
+			exit 0
+			;;
+		t)
+			TEST=true;;
+	esac
+done
+
+
 make
-rm -rf plots/
-python backtrace.py
+if $TEST; then
+	python backtrace.py -t
+else
+	python backtrace.py
+fi
 python chartmedaddy.py
+pandoc head.md indices.md tail.md > README.md
