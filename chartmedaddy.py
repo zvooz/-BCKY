@@ -70,6 +70,26 @@ progress_bar = ProgressBar(progress_report_count=2)
 # }
 
 
+def std_layout(index=u"indices comparison", yaxis=u"price"):
+	return {
+		u"title": go.layout.Title(
+			text=index,
+			xref=u"paper",
+			x=0
+		),
+		u"xaxis": go.layout.XAxis(
+			title=go.layout.xaxis.Title(
+				text=u"date"
+			)
+		),
+		u"yaxis": go.layout.YAxis(
+			title=go.layout.yaxis.Title(
+				text=yaxis
+			)
+		)
+	}
+
+
 def generate_md_index(index, link_candlestick, link_mountain):
 	global md_str
 	md_str += u"### {}\n\n{}\n\ncomponent|weight\n---------|------\n".format(index, portfolios.indices[index][1])
@@ -111,6 +131,7 @@ def plot_comparison(indices):
 			)
 		)
 	
+	data_layout.update_layout(std_layout(yaxis=u"percent change"))
 	# data_layout.update_layout(std_slider, xaxis_range=[trading_days[0], trading_days[-1]], title_text=u"comparisons")
 	
 	filename = os.path.join(DirectoryElements.plots_subdir, u"comparison.html")
@@ -153,6 +174,7 @@ def plot_mountain(index):
 		
 	)
 	
+	data_layout.update_layout(std_layout(index=index))
 	data_layout.update_layout(xaxis_rangeslider_visible=True)
 	
 	# data_layout.update_layout(std_slider, xaxis_range=[trading_days[0], trading_days[-1]])
@@ -186,6 +208,8 @@ def plot_candlestick(index):
 			)
 		]
 	)
+	
+	data_layout.update_layout(std_layout(index=index))
 	
 	filename = os.path.join(DirectoryElements.plots_subdir, index + u" candlestick.html")
 	
