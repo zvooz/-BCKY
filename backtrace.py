@@ -114,20 +114,14 @@ def sanitize_calendar(unsanitized_trading_days):
 	trading_days_copy.sort()
 	
 	next_holiday = trading_days_copy[0]
-	if trading_days_copy[0] == next_holiday:
-		try:
-			trading_days_copy.remove(trading_days_copy[0])
-		except Exception:
-			pass
 	
-	for unsanitized_trading_day in unsanitized_trading_days[1:]:
-		if unsanitized_trading_day > next_holiday:
+	for unsanitized_trading_day in unsanitized_trading_days:
+		if unsanitized_trading_day >= next_holiday:
 			next_holiday = check_holiday(unsanitized_trading_day)
-			if unsanitized_trading_day == next_holiday:
-				try:
-					trading_days_copy.remove(unsanitized_trading_day)
-				except Exception:
-					pass
+			try:
+				trading_days_copy.remove(next_holiday)
+			except Exception:
+				pass
 	
 	return trading_days_copy
 
