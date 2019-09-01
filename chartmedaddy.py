@@ -96,7 +96,7 @@ def generate_md_index(index, link_candlestick, link_mountain):
 	tickers = portfolios.indices[index][0].keys()
 	tickers.sort()
 	md_str += u"{}\n\n".format(u'\n'.join([u"{}|{}".format(ticker, portfolios.indices[index][0][ticker]) for ticker in tickers]))
-	md_str += u"{} candlestick chart:\n\n{}\n\n{} mountain chart:\n\n{}\n\n".format(index, iframe_tag.format(link_candlestick), index, iframe_tag.format(link_mountain))
+	md_str += u"{}\n\n{}\n\n".format(iframe_tag.format(link_candlestick), iframe_tag.format(link_mountain))
 
 
 def generate_md_comparison(link_comparison):
