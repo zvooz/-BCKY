@@ -184,7 +184,7 @@ cd -BCKY
 	Data provided for free by <a href="https://iextrading.com/developer">IEX Cloud</a>. View <a href="https://iextrading.com/api-exhibit-a/">IEX’s Terms of Use</a>
 	<sub>
 		<a href="https://www.iexcloud.io">
-			<img src=“docs/assets/IEX/logo-color.svg“ width="80" height="25"/>
+			<img src="docs/assets/IEX/logo-color.svg" height="25"/>
 		</a>
 	</sub>
 </p>
