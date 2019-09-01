@@ -29,6 +29,7 @@ IEX_baseurl = u"https://cloud.iexapis.com/stable"
 IEX_testurl = u"https://sandbox.iexapis.com/stable"
 get_stock = u"/stock/"
 get_date = u"/chart/date/"
+get_holiday = u"/ref-data/us/dates/holiday/next/1/"
 query_parameters = {u"chartByDay": u"true"}  # this gets only the daily OHLCV data
 
 empty_response = {
@@ -64,16 +65,71 @@ def main(argv):
 	global testing
 	help = u"backtrace.py [OPTIONS]\n\nOPTIONS\n\t-h, --help\n\t\tDisplay this helpful manual.\n\t-t, --test\n\t\tUse IEX's sandbox test data."
 	try:
-		opts, args = getopt.getopt(argv, u"ht", u"test")
+		opts, args = getopt.getopt(argv, u"ht", [u"help", u"test"])
 	except getopt.GetoptError:
-		progress_bar.report(help)
+		print help
 		sys.exit(2)
 	for opt, arg in opts:
-		if opt == (u"-h", u"--help"):
-			progress_bar.report(help)
+		if opt in (u"-h", u"--help"):
+			print help
 			sys.exit()
 		elif opt in (u"-t", u"--test"):
 			testing = True
+
+
+def get_credentials():
+	with open(credentials, u'r') as credentials_file:
+		credentials_data = credentials_file.read()
+		credentials_json = json.loads(credentials_data)
+	
+	tokens = credentials_json[u"tokens" if not testing else u"test tokens"]
+	
+	token = str(tokens[u"publishable token"])
+	if not token:
+		token = str(tokens[u"secret token"])
+		if not token:
+			progress_bar.err_report(u"no tokens available")
+			exit(1)
+		
+	return token
+
+
+def check_holiday(unsaitized_trading_day):
+	holiday = json.loads(
+		requests.get(
+			u"{}{}{}".format(
+				IEX_baseurl if not testing else IEX_testurl,
+				get_holiday,
+				unsaitized_trading_day.strftime(u"%Y%m%d")
+			),
+			params={u"token": get_credentials()}
+		).text
+	)
+	return datetime.datetime.strptime(holiday[0][u"date"], u"%Y-%m-%d").date()
+
+
+def sanitize_calendar(unsanitized_trading_days):
+	unsanitized_trading_days.sort()
+	trading_days_copy = copy.deepcopy(unsanitized_trading_days)
+	trading_days_copy.sort()
+	
+	next_holiday = trading_days_copy[0]
+	if trading_days_copy[0] == next_holiday:
+		try:
+			trading_days_copy.remove(trading_days_copy[0])
+		except Exception:
+			pass
+	
+	for unsanitized_trading_day in unsanitized_trading_days[1:]:
+		if unsanitized_trading_day > next_holiday:
+			next_holiday = check_holiday(unsanitized_trading_day)
+			if unsanitized_trading_day == next_holiday:
+				try:
+					trading_days_copy.remove(unsanitized_trading_day)
+				except Exception:
+					pass
+	
+	return trading_days_copy
 
 
 def get_trading_days_all(ftp):
@@ -81,10 +137,11 @@ def get_trading_days_all(ftp):
 	
 	for filename in ftp.nlst()[2:]:
 		try:
-			templist.append(datetime.datetime.strptime(filename, u"CrossStats%Y%m%d.txt").date())
+			day_with_cross = datetime.datetime.strptime(filename, u"CrossStats%Y%m%d.txt").date()
 		except Exception:
 			continue
-			
+		templist.append(day_with_cross)
+	
 	templist.sort()
 	
 	if len(templist) > 0:
@@ -94,8 +151,7 @@ def get_trading_days_all(ftp):
 
 
 def get_trading_days():
-	trading_days_processed = set(
-		[datetime.datetime.strptime(EOD, u"%Y-%m-%d").date() for EOD in os.walk(directory_elements.EODs_dir).next()[-1]])
+	trading_days_processed = set([datetime.datetime.strptime(EOD, u"%Y-%m-%d").date() for EOD in os.walk(directory_elements.EODs_dir).next()[-1]])
 
 	trading_days_unprocessed = set([
 		datetime_object.date() for datetime_object in list(
@@ -116,24 +172,7 @@ def get_trading_days():
 	trading_days_unprocessed = list(trading_days_unprocessed.intersection(trading_days_all) - trading_days_processed)
 	trading_days_unprocessed.sort()
 
-	return trading_days_unprocessed
-
-
-def get_credentials():
-	with open(credentials, u'r') as credentials_file:
-		credentials_data = credentials_file.read()
-		credentials_json = json.loads(credentials_data)
-
-	tokens = credentials_json[u"tokens" if not testing else u"test tokens"]
-
-	token = str(tokens[u"publishable token"])
-	if not token:
-		token = str(tokens[u"secret token"])
-		if not token:
-			progress_bar.err_report(u"no tokens available")
-			exit(1)
-
-	return token
+	return sanitize_calendar(trading_days_unprocessed)
 
 
 # def query_thread(symbol):
@@ -154,14 +193,14 @@ def get_credentials():
 # 	time.sleep(0.05)
 
 
-def dict_to_DataFrame(BCKY_dict):
-	BCKY_df = pandas.DataFrame(BCKY_dict)
-	BCKY_df_columns = BCKY_df.columns.tolist()
-	BCKY_df_columns.remove(symbol_column)
-	BCKY_df_columns.insert(0, symbol_column)
-	BCKY_df = BCKY_df[BCKY_df_columns]
-	BCKY_df.sort_values(by=symbol_column)
-	return BCKY_df
+def dict_to_df(index_dict):
+	index_df = pandas.DataFrame(index_dict)
+	index_df_columns = index_df.columns.tolist()
+	index_df_columns.remove(symbol_column)
+	index_df_columns.insert(0, symbol_column)
+	index_df = index_df[index_df_columns]
+	index_df.sort_values(by=symbol_column)
+	return index_df
 
 
 def pd_to_csv(file_path, pd):
@@ -169,16 +208,22 @@ def pd_to_csv(file_path, pd):
 		pd.to_csv(file_path, mode=u'a', header=False, index=False)
 	else:
 		pd.to_csv(file_path, index=False)
+		
+
+if __name__ == "__main__":
+	main(sys.argv[1:])
 
 
 query_parameters[u"token"] = get_credentials()
 
-indices_components = {index: set(portfolios.indices[index].keys()) for index in portfolios.indices.keys()}
+indices_components = {index: set(portfolios.indices[index][0].keys()) for index in portfolios.indices.keys()}
 symbols = set.union(*indices_components.values())
 
 days_iter = 0
 
 big_start_time = datetime.datetime.now()
+
+print (u"receiving {} data from IEX...".format(u"sandbox test" if testing else u"real"))
 
 trading_days = get_trading_days()
 for trading_day in trading_days:
@@ -230,9 +275,6 @@ for trading_day in trading_days:
 				symbol_ohlcv = empty_response
 		except Exception:
 			symbol_ohlcv = empty_response
-		
-		# if symbol == u"BYND":
-		# 	print symbol_ohlcv
 
 		for column in columns_to_remove:
 			if column in symbol_ohlcv:
@@ -248,21 +290,17 @@ for trading_day in trading_days:
 		
 		time.sleep(0.025)
 	
-	progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=symbol, suffix=u"done", decimals=2, position=1)
+	progress_bar.out(symbol_iter, len(symbols), start_time=small_start_time, prefix=u"all tickers", suffix=u"done", decimals=2, position=1)
 
 	if EOD_ohlcv:
-		EOD_df = dict_to_DataFrame(EOD_ohlcv)
+		EOD_df = dict_to_df(EOD_ohlcv)
 		pd_to_csv(os.path.join(directory_elements.EODs_dir, trading_day.isoformat()), EOD_df)
 	
 	for index in portfolios.indices.keys():
-		pd_to_csv(os.path.join(directory_elements.indices_dirs[index], trading_day.isoformat()), dict_to_DataFrame(indices_ohlcvs[index]))
+		pd_to_csv(os.path.join(directory_elements.indices_dirs[index], trading_day.isoformat()), dict_to_df(indices_ohlcvs[index]))
 	
 	days_iter += 1
 	
 	time.sleep(0.025)
 
-progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_day, suffix=u"done", decimals=2, position=0)
-
-
-if __name__ == "__main__":
-	main(sys.argv[1:])
+progress_bar.out(days_iter, len(trading_days), start_time=big_start_time, prefix=trading_days[-1], suffix=u"done", decimals=2, position=0)
