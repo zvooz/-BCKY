@@ -70,7 +70,7 @@ progress_bar = ProgressBar(progress_report_count=2)
 # }
 
 
-def generate_md(index, link_candlestick, link_mountain):
+def generate_md_index(index, link_candlestick, link_mountain):
 	global md_str
 	md_str += u"### {}\n\n{}\n\ncomponent|weight\n---------|------\n".format(index, portfolios.indices[index][1])
 	tickers = portfolios.indices[index][0].keys()
@@ -79,7 +79,7 @@ def generate_md(index, link_candlestick, link_mountain):
 	md_str += u"{} candlestick chart:\n\n{}\n\n{} mountain chart:\n\n{}\n\n".format(index, iframe_tag.format(link_candlestick), index, iframe_tag.format(link_mountain))
 
 
-def generate_md(link_comparison):
+def generate_md_comparison(link_comparison):
 	global md_str
 	md_str += u"### performance comparison between indices:\n{}\n\n".format(iframe_tag.format(link_comparison))
 
@@ -211,10 +211,10 @@ def plot_all():
 	for index in indices:
 		link_candlestick = plot_candlestick(index)
 		link_mountain = plot_mountain(index)
-		generate_md(index, link_candlestick, link_mountain)
+		generate_md_index(index, link_candlestick, link_mountain)
 	
 	link_comparison = plot_comparison(indices)
-	generate_md(link_comparison)
+	generate_md_comparison(link_comparison)
 
 
 def track(index):
