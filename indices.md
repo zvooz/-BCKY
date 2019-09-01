@@ -11,14 +11,13 @@ component|weight
 SPY|1
 
 $SPY candlestick chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/$SPY candlestick.html"></iframe>
 
 $SPY mountain chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/$SPY mountain.html"></iframe>
 
-## Fantasy Indices
-
-The following are the descriptions and performances of indices currently tracked by this project. This section is automatically generated whenever the indices are updated. charts might not show up because of [this](https://github.github.com/gfm/#disallowed-raw-html-extension-).
 ### ^BCKY.A
 
 ^BCKY.A tracks the fewest stocks. It uses the composition from [this post](https://www.reddit.com/r/wallstreetbets/comments/b6hvdf/i_indexed_beckys_portfolio_so_you_dont_have_to/).
@@ -35,14 +34,13 @@ SBUX|16
 ULTA|4
 
 ^BCKY.A candlestick chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.A candlestick.html"></iframe>
 
 ^BCKY.A mountain chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.A mountain.html"></iframe>
 
-## Fantasy Indices
-
-The following are the descriptions and performances of indices currently tracked by this project. This section is automatically generated whenever the indices are updated. charts might not show up because of [this](https://github.github.com/gfm/#disallowed-raw-html-extension-).
 ### ^BCKY.B
 
 ^BCKY.B is a much longer, and possibly over-done extension to ^BCKY.A. It uses the composition from [this post](https://www.reddit.com/r/wallstreetbets/comments/b6mudk/bcky_update_wsb_was_right_diversification_bad/). In addition to what is in ^BCKY.A, it has the following components:
@@ -72,14 +70,13 @@ ULTA|4
 VFC|15
 
 ^BCKY.B candlestick chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.B candlestick.html"></iframe>
 
 ^BCKY.B mountain chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.B mountain.html"></iframe>
 
-## Fantasy Indices
-
-The following are the descriptions and performances of indices currently tracked by this project. This section is automatically generated whenever the indices are updated. charts might not show up because of [this](https://github.github.com/gfm/#disallowed-raw-html-extension-).
 ### ^BCKY.V
 
 ^BCKY.V uses the composition from [that r/investing post](https://www.reddit.com/r/investing/comments/9n31xf/introducing_the_white_girl_index/).
@@ -110,14 +107,13 @@ UAA|57
 ULTA|4
 
 ^BCKY.V candlestick chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.V candlestick.html"></iframe>
 
 ^BCKY.V mountain chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^BCKY.V mountain.html"></iframe>
 
-## Fantasy Indices
-
-The following are the descriptions and performances of indices currently tracked by this project. This section is automatically generated whenever the indices are updated. charts might not show up because of [this](https://github.github.com/gfm/#disallowed-raw-html-extension-).
 ### ^KREN
 
 ^KREN is from [this r/WallStreetBets post](https://www.reddit.com/r/wallstreetbets/comments/craedi/buy_the_karen/).
@@ -135,14 +131,13 @@ TGT|15
 TM|9
 
 ^KREN candlestick chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^KREN candlestick.html"></iframe>
 
 ^KREN mountain chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^KREN mountain.html"></iframe>
 
-## Fantasy Indices
-
-The following are the descriptions and performances of indices currently tracked by this project. This section is automatically generated whenever the indices are updated. charts might not show up because of [this](https://github.github.com/gfm/#disallowed-raw-html-extension-).
 ### ^RTRD
 
 Just like the WSB, ^RTRD's components are all very retarded. It's quite self-explanatory.
@@ -154,8 +149,13 @@ SHMP|54054
 YRIV|267
 
 ^RTRD candlestick chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^RTRD candlestick.html"></iframe>
 
 ^RTRD mountain chart:
+
 <iframe style="border:none;" seamless="seamless" src="docs/plots/^RTRD mountain.html"></iframe>
+
+### performance comparison between indices:
+<iframe style="border:none;" seamless="seamless" src="docs/plots/comparison.html"></iframe>
 
